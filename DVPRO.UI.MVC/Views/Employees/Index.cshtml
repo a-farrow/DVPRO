@@ -1,0 +1,163 @@
+﻿@model IEnumerable<DVPRO.DATA.EF.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row text-center">
+    <h1 id="indexTitle" class="pt-3">Employees</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Add New</a>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div id="MessageContent" class="text-center"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <table class="table table-hover table-dark table-striped dataTable" id="EmployeesTable">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Position)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Salary)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HireDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TerminationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PostalCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CountryId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Department)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Manager)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr id="Employee-@item.EmployeeId">
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.EmployeeId">@Html.DisplayFor(modelItem => item.FullName)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HireDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TerminationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.Location.Country.CountryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manager.FullName)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary rounded-pill" asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a> *@
+                        <a class="btn btn-danger rounded-pill btn-sm m-2" data-ajax="true" data-ajax-confirm="Are you sure you want to delete @item.FirstName?" data-ajax-failure="deleteFailed" data-ajax-success="deleteConfirmed" data-ajax-method="POST"
+                           href="~/Employees/AjaxDelete/@item.EmployeeId">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/2.0.7/sorting/datetime-moment.js"></script>
+
+    <script>
+        $.fn.dataTable.moment('M/D/YYYY');
+        new DataTable('#EmployeesTable', {
+            layout: {
+                topStart: {
+                    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                }
+            }
+        });
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table
+            let rowId = "#Employee-" + response.id
+            console.log(rowId)
+            $("#EmployeesTable").find(rowId).remove()
+
+            //diplay the status message
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>")
+        }
+
+        function deleteFailed(response, status, data) {
+            //display the status message
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete Unsuccessful.</div>")
+        }
+    </script>
+}

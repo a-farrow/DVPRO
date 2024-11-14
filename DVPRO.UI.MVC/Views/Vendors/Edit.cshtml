@@ -1,0 +1,76 @@
+﻿@model DVPRO.DATA.EF.Models.Vendor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Edit @Model.VendorName</h3>
+                </div>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="VendorId" />
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorName" class="control-label"></label>
+                        <input type="text" asp-for="VendorName" class="form-control" />
+                        <span asp-validation-for="VendorName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorContact" class="control-label"></label>
+                        <input type="text" asp-for="VendorContact" class="form-control" />
+                        <span asp-validation-for="VendorContact" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorPhone" class="control-label"></label>
+                        <input type="text" asp-for="VendorPhone" class="form-control" />
+                        <span asp-validation-for="VendorPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorEmail" class="control-label"></label>
+                        <input type="text" asp-for="VendorEmail" class="form-control" />
+                        <span asp-validation-for="VendorEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorAddress" class="control-label"></label>
+                        <input type="text" asp-for="VendorAddress" class="form-control" />
+                        <span asp-validation-for="VendorAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorCity" class="control-label"></label>
+                        <input type="text" asp-for="VendorCity" class="form-control" />
+                        <span asp-validation-for="VendorCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorState" class="control-label"></label>
+                        <input type="text" asp-for="VendorState" class="form-control" />
+                        <span asp-validation-for="VendorState" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="VendorPostalCode" class="control-label"></label>
+                        <input type="text" asp-for="VendorPostalCode" class="form-control" />
+                        <span asp-validation-for="VendorPostalCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="CountryId" class="control-label">Country</label>
+                        <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"><option>--Select a Country--</option></select>
+                        <span asp-validation-for="CountryId" class="text-danger"></span>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 offset-md-3"><input type="submit" value="Save" class="btn btn-primary" /></div>
+                        <div class="col-md-4"><a asp-action="Index" class="btn btn-secondary">Cancel</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

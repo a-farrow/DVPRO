@@ -1,0 +1,100 @@
+﻿@model DVPRO.DATA.EF.Models.Vendor
+
+@{
+    ViewData["Title"] = Model.VendorName + " Details";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-2">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.VendorName):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.VendorName)
+                    </p>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.VendorContact):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.VendorContact)
+                    </p>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">  
+                        <strong>@Html.DisplayNameFor(model => model.VendorPhone):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.VendorPhone)
+                    </p>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">     
+                        <strong>@Html.DisplayNameFor(model => model.VendorEmail):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.VendorEmail)
+                    </p>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.VendorAddress):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.VendorAddress)
+                    </p>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.VendorCity):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.VendorCity)
+                    </p>
+                </div>
+
+                @if (Model.VendorState != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.VendorState):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.VendorState)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.VendorPostalCode != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.VendorPostalCode):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.VendorPostalCode)
+                        </p>
+                    </div>
+                }
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.Country):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.Country.CountryName)
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

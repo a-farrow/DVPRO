@@ -1,0 +1,45 @@
+﻿@model DVPRO.DATA.EF.Models.Country
+
+@{
+    ViewData["Title"] = Model.CountryName + " Details";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.CountryName):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.CountryName)
+                    </p>
+                </div>
+
+                @if (Model.Region != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Region):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Region.RegionName)
+                        </p>
+                    </div>
+                }
+
+                <div class="text-center">
+                    <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

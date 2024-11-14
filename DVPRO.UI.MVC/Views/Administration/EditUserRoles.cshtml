@@ -1,0 +1,44 @@
+﻿@model List<RoleUserViewModel>
+@{
+    ViewData["Title"] = "Edit Roles for User";
+    var roleId = ViewData["UserId"];
+}
+
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary"><i class="fa fa-thin fa-atom me-2"></i>Edit Roles for User</h3>
+                </div>
+                <form method="post">
+                    <div class="card bg-secondary text-center">
+                        <div class="card-header">
+                            <h2 class="text-primary">Add or remove roles for this user</h2>
+                            <hr />
+                        </div>
+                        <div class="card-body">
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <div class="form-check m-1">
+                                    <input type="hidden" asp-for="@Model[i].RoleId" />
+                                    <input type="hidden" asp-for="@Model[i].RoleName" />
+                                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                                        @Model[i].RoleName
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" value="Update" class="btn btn-primary"
+                                   style="width:auto" />
+                            <a asp-action="ListUsers" class="btn btn-primary" style="width:auto">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

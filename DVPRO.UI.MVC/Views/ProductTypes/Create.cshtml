@@ -1,0 +1,36 @@
+﻿@model DVPRO.DATA.EF.Models.ProductType
+
+@{
+    ViewData["Title"] = "Add New Product Type";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Add New Product Type</h3>
+                </div>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-2">
+                        <label asp-for="ProductTypeName" class="control-label"></label>
+                        <input type="text" asp-for="ProductTypeName" class="form-control" />
+                        <span asp-validation-for="ProductTypeName" class="text-danger"></span>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 offset-md-3"><input type="submit" value="Create" class="btn btn-primary" /></div>
+                        <div class="col-md-4"><a asp-action="Index" class="btn btn-secondary">Cancel</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        @section Scripts {
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }

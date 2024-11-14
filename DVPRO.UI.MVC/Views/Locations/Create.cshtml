@@ -1,0 +1,56 @@
+﻿@model DVPRO.DATA.EF.Models.Location
+
+@{
+    ViewData["Title"] = "Add a New Location";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Add a New Location</h3>
+                </div>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="LocationAddress" class="control-label"></label>
+                        <input asp-for="LocationAddress" class="form-control" />
+                        <span asp-validation-for="LocationAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LocationCity" class="control-label"></label>
+                        <input asp-for="LocationCity" class="form-control" />
+                        <span asp-validation-for="LocationCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LocationState" class="control-label"></label>
+                        <input asp-for="LocationState" class="form-control" />
+                        <span asp-validation-for="LocationState" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LocationPostalCode" class="control-label"></label>
+                        <input asp-for="LocationPostalCode" class="form-control" />
+                        <span asp-validation-for="LocationPostalCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CountryId" class="control-label">Country</label>
+                        <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                    </div>
+                    <div class="row">
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

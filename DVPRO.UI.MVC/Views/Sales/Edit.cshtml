@@ -1,0 +1,51 @@
+﻿@model DVPRO.DATA.EF.Models.Sale
+
+@{
+    ViewData["Title"] = "Edit Sale";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Edit Sale</h3>
+                </div>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="SaleId" />
+                    <div class="form-group mb-2">
+                        <label asp-for="SaleDate" class="control-label"></label>
+                        <input type="text" asp-for="SaleDate" class="form-control" />
+                        <span asp-validation-for="SaleDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="SalespersonId" class="control-label"></label>
+                        <select asp-for="SalespersonId" class="form-control" asp-items="ViewBag.SalespersonId"><option>--Select a Sales Person--</option></select>
+                        <span asp-validation-for="SalespersonId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="CustomerId" class="control-label"></label>
+                        <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"><option>--Select a Customer--</option></select>
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="SaleTotal" class="control-label"></label>
+                        <input type="text" asp-for="SaleTotal" class="form-control" />
+                        <span asp-validation-for="SaleTotal" class="text-danger"></span>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 offset-md-3"><input type="submit" value="Save" class="btn btn-primary" /></div>
+                        <div class="col-md-4"><a asp-action="Index" class="btn btn-secondary">Cancel</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

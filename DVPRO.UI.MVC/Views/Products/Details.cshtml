@@ -1,0 +1,138 @@
+﻿@model DVPRO.DATA.EF.Models.Product
+
+@{
+    ViewData["Title"] = Model.ProductName + " Details";
+}
+
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.ProductName):</strong>
+                        <br/>
+                        @Html.DisplayFor(model => model.ProductName)
+                    </p>
+                </div>
+
+                @if (Model.Description != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Description):</strong>
+                            <br />
+                        @Html.DisplayFor(model => model.Description)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.CostPerUnit != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.CostPerUnit):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.CostPerUnit)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.PricePerUnit != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.PricePerUnit):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.PricePerUnit)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.UnitType != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.UnitType):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.UnitType)
+
+                        </p>
+                    </div>
+                }
+
+                @if (Model.UnitsInStock != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.UnitsInStock):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.UnitsInStock)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.UnitsOnOrder != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.UnitsOnOrder):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.UnitsOnOrder)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.ProductImage != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.ProductImage):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.ProductImage)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.ProductStatus != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.ProductStatus):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.ProductStatus.ProductStatusName)
+                        </p>
+                    </div>
+                }
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.ProductType):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.ProductType.ProductTypeName)
+                    </p>
+                </div>
+
+                @if(Model.VendorId != null){
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Vendor):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Vendor.VendorName)
+                        </p>
+                    </div>
+                }
+
+                    <div class ="text-center">
+                        <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+                    </div>
+                    
+            </div>
+         </div>
+   </div>
+</div>

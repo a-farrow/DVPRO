@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVPRO.UI.MVC", "DVPRO.UI.MVC\DVPRO.UI.MVC.csproj", "{65993540-1485-431E-A433-1EC8B6BB19EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVPRO.DATA.EF", "DVPRO.DATA.EF\DVPRO.DATA.EF.csproj", "{6932621F-288F-4A7D-B36D-27CE5D2B69C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65993540-1485-431E-A433-1EC8B6BB19EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65993540-1485-431E-A433-1EC8B6BB19EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65993540-1485-431E-A433-1EC8B6BB19EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65993540-1485-431E-A433-1EC8B6BB19EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6932621F-288F-4A7D-B36D-27CE5D2B69C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6932621F-288F-4A7D-B36D-27CE5D2B69C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6932621F-288F-4A7D-B36D-27CE5D2B69C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6932621F-288F-4A7D-B36D-27CE5D2B69C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F5878CB-F924-44C9-8059-C0540EB4F0EF}
+	EndGlobalSection
+EndGlobal

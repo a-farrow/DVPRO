@@ -1,0 +1,102 @@
+﻿@model IEnumerable<DVPRO.DATA.EF.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row text-center">
+    <h1 id="indexTitle" class="pt-3">Orders</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Add New</a>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div id="MessageContent" class="text-center"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <table class="table table-hover table-dark table-striped dataTable" id="OrdersTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ponumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vendor)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr id="Order-@item.OrderId">
+                    <td>
+                            <a asp-action="Details" asp-route-id="@item.OrderId">@Html.DisplayFor(modelItem => item.Ponumber)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendor.VendorName)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary rounded-pill" asp-action="Edit" asp-route-id="@item.OrderId">Edit</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a> *@
+                        <a class="btn btn-danger rounded-pill btn-sm m-2" data-ajax="true" data-ajax-confirm="Are you sure you want to delete this order placed on @item.OrderDate?" data-ajax-failure="deleteFailed" data-ajax-success="deleteConfirmed" data-ajax-method="POST"
+                            href="~/Orders/AjaxDelete/@item.OrderId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/2.0.7/sorting/datetime-moment.js"></script>
+    <script>
+        $.fn.dataTable.moment('M/D/YYYY');
+        new DataTable('#OrdersTable', {
+            layout: {
+                topStart: {
+                    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                }
+            }
+        });
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table
+            let rowId = "#Order-" + response.id
+            console.log(rowId)
+            $("#OrdersTable").find(rowId).remove()
+
+            //diplay the status message
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>")
+        }
+
+        function deleteFailed(response, status, data) {
+            //display the status message
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete Unsuccessful.</div>")
+        }
+    </script>
+}

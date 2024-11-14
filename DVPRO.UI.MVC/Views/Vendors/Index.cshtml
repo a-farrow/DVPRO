@@ -1,0 +1,128 @@
+﻿@model IEnumerable<DVPRO.DATA.EF.Models.Vendor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row text-center">
+    <h1 id="indexTitle" class="pt-3">Vendors</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Add New</a>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div id="MessageContent" class="text-center"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <table class="table table-hover table-dark table-striped dataTable" id="VendorsTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorContact)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorPhone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorCity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorState)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VendorPostalCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr id="Vendor-@item.VendorId">
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.VendorId">@Html.DisplayFor(modelItem => item.VendorName)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorContact)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorState)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VendorPostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country.CountryName)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary rounded-pill" asp-action="Edit" asp-route-id="@item.VendorId">Edit</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a> *@
+                        <a class="btn btn-danger rounded-pill btn-sm m-2" data-ajax="true" data-ajax-confirm="Are you sure you want to delete @item.VendorName?" data-ajax-failure="deleteFailed" data-ajax-success="deleteConfirmed" data-ajax-method="POST"
+                            href="~/Vendors/AjaxDelete/@item.VendorId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+ </div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script>
+        new DataTable('#VendorsTable', {
+            layout: {
+                topStart: {
+                    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                }
+            }
+        });
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table
+            let rowId = "#Vendor-" + response.id
+            console.log(rowId)
+            $("#VendorsTable").find(rowId).remove()
+
+            //diplay the status message
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>")
+        }
+        function deleteFailed(response, status, data) {
+            //display the status message
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete Unsuccessful.</div>")
+        }
+    </script>
+}

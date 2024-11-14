@@ -1,0 +1,148 @@
+﻿@model IEnumerable<DVPRO.DATA.EF.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row text-center">
+    <h1 id="indexTitle" class="pt-3">Products</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Add New</a>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div id="MessageContent" class="text-center"></div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <table class="table table-hover table-dark table-striped dataTable" id="ProductTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CostPerUnit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PricePerUnit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitsInStock)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitsOnOrder)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vendor)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr id="Product-@item.ProductId">
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ProductId">@Html.DisplayFor(modelItem => item.ProductName)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CostPerUnit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PricePerUnit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsInStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductImage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductStatus.ProductStatusName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)
+                    </td>
+                    <td>
+                        @if(item.VendorId == null)
+                        {
+                                <span>N/A</span>                                
+                        }
+                        else{                                
+                            @Html.DisplayFor(modelItem => item.Vendor.VendorName)
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary rounded-pill" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a> *@
+                        <a class="btn btn-danger rounded-pill btn-sm m-2" data-ajax="true" data-ajax-confirm="Are you sure you want to delete @item.ProductName?" data-ajax-failure="deleteFailed" data-ajax-success="deleteConfirmed" data-ajax-method="POST"
+                            href="~/Products/AjaxDelete/@item.ProductId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script>
+        new DataTable('#ProductTable', {
+            layout: {
+                topStart: {
+                    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                }
+            }
+        });
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table
+            let rowId = "#Product-" + response.id
+            console.log(rowId)
+            $("#ProductTable").find(rowId).remove()
+
+            //diplay the status message
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>")
+        }
+
+        function deleteFailed(response, status, data) {
+            //display the status message
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete Unsuccessful.</div>")
+        }
+    </script>
+}

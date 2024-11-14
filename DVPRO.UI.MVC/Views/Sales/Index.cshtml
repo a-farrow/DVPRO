@@ -1,0 +1,110 @@
+﻿@model IEnumerable<DVPRO.DATA.EF.Models.Sale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row text-center">
+    <h1 id="indexTitle" class="pt-3">Sales</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Add New</a>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div id="MessageContent" class="text-center"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <table class="table table-hover table-dark table-striped dataTable" id="SalesTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SaleId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SaleDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SaleTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Salesperson)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr id="Sale-@item.SaleId">
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.SaleId">@Html.DisplayFor(modelItem => item.SaleId)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SaleDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SaleTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salesperson.FirstName)
+                        @Html.DisplayFor(modelItem => item.Salesperson.LastName)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary rounded-pill" asp-action="Edit" asp-route-id="@item.SaleId">Edit</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.SaleId">Delete</a> *@
+                        <a class="btn btn-danger rounded-pill btn-sm m-2" data-ajax="true" data-ajax-confirm="Are you sure you want to delete the sale that happened on @item.SaleDate?" data-ajax-failure="deleteFailed" data-ajax-success="deleteConfirmed" data-ajax-method="POST"
+                            href="~/Sales/AjaxDelete/@item.SaleId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/2.0.7/sorting/datetime-moment.js"></script>
+    <script>
+        $.fn.dataTable.moment('M/D/YYYY');
+        new DataTable('#SalesTable', {
+            layout: {
+                topStart: {
+                    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                }
+            }
+        });
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table
+            let rowId = "#Sale-" + response.id
+            console.log(rowId)
+            $("#SalesTable").find(rowId).remove()
+
+            //diplay the status message
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>")
+        }
+
+        function deleteFailed(response, status, data) {
+            //display the status message
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete Unsuccessful.</div>")
+        }
+
+    </script>
+}

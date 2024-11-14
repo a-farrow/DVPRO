@@ -1,0 +1,173 @@
+﻿@model DVPRO.DATA.EF.Models.Employee
+
+@{
+    ViewData["Title"] = Model.FirstName + " " + Model.LastName + " Details";
+}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>Name:</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.FirstName)
+                        @Html.DisplayFor(model => model.LastName)
+                    </p>
+                </div>
+
+                @if (Model.Position != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Position):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Position)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.Salary != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Salary):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Salary)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.HireDate != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.HireDate):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.HireDate)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.TerminationDate != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.TerminationDate):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.TerminationDate)
+
+                        </p>
+                    </div>
+                }
+
+                @if (Model.Address != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Address):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Address)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.City != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.City):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.City)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.State != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.State):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.State)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.PostalCode != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.PostalCode):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.PostalCode)
+                        </p>
+                    </div>
+                }
+
+                @if (Model.CountryId != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.CountryId):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.CountryId)
+                        </p>
+                    </div>
+                } 
+                
+                @if (Model.Email != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Email):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Email)
+                        </p>
+                    </div>
+                }
+                
+                @if (Model.Phone != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Phone):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Phone)
+                        </p>
+                    </div>
+                }
+                
+                <div class="form-floating mb-3">
+                    <p class="mb-0">
+                        <strong>@Html.DisplayNameFor(model => model.Department):</strong>
+                        <br />
+                        @Html.DisplayFor(model => model.Department.DepartmentName)
+                    </p>
+                </div>
+                
+                @if (Model.Manager != null)
+                {
+                    <div class="form-floating mb-3">
+                        <p class="mb-0">
+                            <strong>@Html.DisplayNameFor(model => model.Manager):</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Manager.FirstName) 
+                            @Html.DisplayFor(model => model.Manager.LastName)
+                        </p>
+                    </div>
+                }
+
+                <div class="text-center">
+                    <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
